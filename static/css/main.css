@@ -1,0 +1,117 @@
+/* Global enhancements for the AWS SCD 2025 landing */
+:root{
+  --accent: #a78bfa; /* violet-400 */
+  --accent-2: #22d3ee; /* cyan-400 */
+  --accent-3: #f59e0b; /* amber-500 */
+}
+
+/* Smooth anchor scrolling and offset for fixed nav */
+html{ scroll-behavior: smooth; }
+[id]{ scroll-margin-top: 7rem; }
+
+/* Gradient text utility */
+.text-gradient{
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent-3) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Section container tweaks */
+.section{ padding-top: 4rem; padding-bottom: 4rem; }
+.section-sm{ padding-top: 3rem; padding-bottom: 3rem; }
+
+/* Hero background: glowing orbs + subtle grid */
+.hero{
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero::before{
+  content:"";
+  position:absolute; inset: -20% -10% auto -10%; height: 60vh;
+  background: radial-gradient(40% 40% at 30% 50%, rgba(167,139,250,0.25) 0%, rgba(34,211,238,0.2) 30%, rgba(17,24,39,0) 70%);
+  filter: blur(30px) saturate(130%);
+  z-index: -1;
+  animation: float 12s ease-in-out infinite;
+}
+.hero::after{
+  content:""; position:absolute; inset:-2px;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(75% 50% at 50% 50%, rgba(0,0,0,0.9), rgba(0,0,0,0) 70%);
+  z-index: -2;
+}
+
+@keyframes float{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-12px) } }
+@keyframes gradientPan{ 0%{ background-position:0% 50% } 50%{ background-position:100% 50% } 100%{ background-position:0% 50% } }
+
+/* Reveal on scroll */
+.reveal{ opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.is-visible{ opacity: 1; transform: translateY(0); }
+
+/* Glass card utility */
+.glass-card{
+  background: rgba(17,24,39,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+.no-backdrop .glass-card{ background: rgba(17,24,39,0.85); }
+
+/* Card hover tilt */
+.tilt-sm{ transform: perspective(800px) rotateX(0) rotateY(0) translateY(0); transition: transform .2s ease, box-shadow .2s ease; }
+.tilt-sm:hover{ transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
+
+/* Primary button accent */
+.btn-primary{
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+  background-size: 200% 100%;
+  color: #0b1020;
+  font-weight: 700;
+  transition: background-position .4s ease, transform .15s ease;
+}
+.btn-primary:hover{ background-position: 100% 0; transform: translateY(-1px); }
+.btn-primary:active{ transform: translateY(0); }
+
+/* Tiny badge */
+.badge{ border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); }
+
+/* Counter digits */
+.counter{ font-variant-numeric: tabular-nums; }
+
+/* Simple parallax on scroll */
+[data-parallax]{ will-change: transform; }
+
+
+/*Change the scrollbar */
+/* Custom scrollbar (dark, AWS accents) */
+/* Firefox */
+html{
+  scrollbar-width: thin; /* auto | thin | none */
+  scrollbar-color: rgba(167,139,250,.85) rgba(255,255,255,.06); /* thumb | track */
+}
+
+/* Chromium/Edge/Safari */
+*::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track{
+  background: rgba(255,255,255,0.04);
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-thumb{
+  background-image: linear-gradient(180deg, var(--accent), var(--accent-2), var(--accent-3));
+  border-radius: 9999px;
+  border: 2px solid rgba(17,24,39,0.6); /* creates spacing so thumb isn’t too chunky */
+}
+*::-webkit-scrollbar-thumb:hover{
+  background-image: linear-gradient(180deg, var(--accent-2), var(--accent-3), var(--accent));
+}
+*::-webkit-scrollbar-corner{ background: transparent; }
+
