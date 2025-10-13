@@ -1,10 +1,23 @@
 from flask import Flask, render_template, flash, redirect, url_for, request
 import csv
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = "SCD"
 
+dynamic_routes = os.getenv("dynamic_routes")
+if dynamic_routes:
+    try:
+        dynamic_routes = eval(dynamic_routes)
+        for route, target in dynamic_routes.items():
+            app.add_url_rule(f'/{route}', route, lambda target=target: redirect(target))
+    except Exception as e:
+        logging.error(f"Error setting up dynamic routes: {e}")
+        
 @app.route('/')
 def index():
     return render_template("index.html")
