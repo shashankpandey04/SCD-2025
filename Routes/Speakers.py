@@ -1,14 +1,5 @@
 from flask import Blueprint, render_template, flash, redirect, request, jsonify
-
-from pymongo import MongoClient
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-MONGO_URI = os.getenv("MONGO_URI")
-client = MongoClient(MONGO_URI)
-db = client['scd']
+from Database.mongo import db
 
 speaker_bp = Blueprint('speakers',__name__)
 
