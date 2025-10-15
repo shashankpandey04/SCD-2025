@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AWS Student Community Day Jalandhar 2025</title>
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#111827">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { display: ['Inter', 'ui-sans-serif','system-ui','-apple-system','Segoe UI','Roboto','Ubuntu','Cantarell','Noto Sans','sans-serif'] } } } };
+    </script>
+    <link href="/static/css/navbar.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/static/image/aws.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body class="bg-neutral-900 text-neutral-100 antialiased">
+    <header class="fixed top-3 left-0 right-0 z-50">
+        <nav class="glass-nav mx-auto max-w-5xl px-4 sm:px-6" aria-label="Primary">
+            <div class="grid grid-cols-3 items-center py-3">
+                <div class="flex items-center gap-3">
+                    <a href="#hero" class="flex items-center">
+                        <span class="sr-only">AWS Student Community Day - Jalandhar 2025</span>
+                    </a>
+                </div>
+
+                <div class="justify-self-center">
+                    <a href="#hero" class="block text-center font-semibold text-base sm:text-lg">AWS SCD Jalandhar 2025</a>
+                </div>
+
+                <div class="justify-self-end sm:hidden">
+                    <button id="nav-toggle" class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-400" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg id="icon-hamburger" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="hidden sm:flex items-center justify-center gap-6 pb-3">
+                <a href="/" class="nav-link text-neutral-200 hover:text-white transition-colors">Home</a>
+                <a href="/speakers" class="nav-link text-neutral-200 hover:text-white transition-colors">Speakers</a>
+                <a href="/sponsor" class="nav-link text-neutral-200 hover:text-white transition-colors">Sponsors</a>
+                <a href="/waitlist" class="nav-link text-neutral-200 hover:text-white transition-colors">Waitlist</a>
+                <a href="/prospectus" class="nav-link text-neutral-200 hover:text-white transition-colors">Prospectus</a>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden sm:hidden mx-4 mt-2 p-3 glass-nav">
+            <div class="flex flex-col items-center gap-3">
+                <a href="/" class="nav-link text-neutral-200 hover:text-white transition-colors">Home</a>
+                <a href="/speakers" class="nav-link text-neutral-200 hover:text-white transition-colors">Speakers</a>
+                <a href="/sponsor" class="nav-link text-neutral-200 hover:text-white transition-colors">Sponsors</a>
+                <a href="/waitlist" class="nav-link text-neutral-200 hover:text-white transition-colors">Waitlist</a>
+                <a href="/prospectus" class="nav-link text-neutral-200 hover:text-white transition-colors">Prospectus</a>
+            </div>
+        </div>
+    </header>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="fixed top-20 left-0 right-0 z-[60]">
+            <div class="mx-auto max-w-5xl px-4 space-y-3">
+                {% for msg in messages %}
+                <div role="alert" data-flash class="glass-card p-4 flex items-start justify-between gap-3 shadow-lg">
+                    <div class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-violet-300 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 100-2 1 1 0 000 2zm-1 2a1 1 0 000 2v3a1 1 0 102 0v-3a1 1 0 00-1-1h-1z" clip-rule="evenodd"/></svg>
+                        <p class="text-sm text-neutral-100">{{ msg }}</p>
+                    </div>
+                    <button type="button" aria-label="Dismiss" class="p-1 rounded hover:bg-white/10" data-close-flash>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <script>
+        document.addEventListener('click', function(e){
+            const btn = e.target.closest('[data-close-flash]');
+            if(btn){ const card = btn.closest('[data-flash]'); if(card) card.remove(); }
+        });
+        </script>
+        {% endif %}
+    {% endwith %}
+
+    <main>
+    {% block content %}{% endblock %}
+    </main>
+
+    <footer class="px-4 pb-8 text-center text-sm text-neutral-400">
+        <div class="mx-auto max-w-6xl">
+            <div>&copy; 2025 AWS Student Community Day Jalandhar <br> Organiser: AWS Cloud Club at Lovely Professional University</div>
+        </div>
+    </footer>
+
+    <script src="/static/js/navbar.js" defer></script>
+    <script src="/static/js/animations.js" defer></script>
+ </body>
+</html>

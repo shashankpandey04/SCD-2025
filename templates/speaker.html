@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Join the Waitlist{% endblock %}
+{% block content %}
+
+<section id="cfs" class="pt-32">
+    <div class="mx-auto max-w-4xl">
+        <div class="glass-card p-6 sm:p-8 reveal">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center">Call for Speakers</h2>
+            <p class="mt-2 text-neutral-300 text-center">Share your expertise on AWS, serverless, GenAI, cloud-native, security, or DevOps.</p>
+            <div id="message" class="mt-4 hidden p-4 rounded-md text-center"></div>
+            <form id="speakerForm" class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Full Name</label>
+                    <input required name="name" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Your name"/>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Email</label>
+                    <input required name="email" type="email" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="you@example.com"/>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Talk Title</label>
+                    <input required name="title" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Title of your session"/>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Track</label>
+                    <select required name="track" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400">
+                        <option value="" disabled selected>Select a track</option>
+                        <option value="AI/ML">AI & Machine Learning</option>
+                        <option value="Cloud">Cloud Computing & Serverless</option>
+                        <option value="Security">Cybersecurity & Compliance</option>
+                        <option value="Web3">Web3 & Blockchain</option>
+                        <option value="DevOps">DevOps & Infrastructure</option>
+                        <option value="Data">Data Analytics & Modern Databases</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="text-sm text-neutral-300">Abstract</label>
+                    <textarea required name="abstract" rows="4" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="What will attendees learn?"></textarea>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Experience Level</label>
+                    <select required name="level" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400">
+                        <option value="" disabled selected>Select level</option>
+                        <option>Beginner</option>
+                        <option>Intermediate</option>
+                        <option>Advanced</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Profile/Links (optional)</label>
+                    <input name="link" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="LinkedIn, GitHub, website"/>
+                </div>
+                <div class="sm:col-span-2 flex justify-center">
+                    <button type="submit" class="btn-primary rounded-md px-6 py-3">Submit Proposal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+document.getElementById('speakerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const messageDiv = document.getElementById('message');
+    
+    try {
+        const response = await fetch('/speakers', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        
+        if (response.ok) {
+            messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-green-500/20 text-green-300';
+            messageDiv.textContent = data.message;
+            e.target.reset();
+        } else {
+            messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-red-500/20 text-red-300';
+            messageDiv.textContent = data.error || 'An error occurred';
+        }
+        messageDiv.classList.remove('hidden');
+    } catch (error) {
+        messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-red-500/20 text-red-300';
+        messageDiv.textContent = 'Failed to submit. Please try again.';
+        messageDiv.classList.remove('hidden');
+    }
+});
+</script>
+
+{% endblock %}

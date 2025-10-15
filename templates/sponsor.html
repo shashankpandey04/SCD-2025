@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% block title %}Join the Waitlist{% endblock %}
+{% block content %}
+
+
+<section id="sponsors" class="pt-32">
+    <div class="mx-auto max-w-6xl">
+        <div class="text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold">Our Sponsors</h2>
+            <p class="mt-3 text-neutral-300">Thank you to our amazing partners who make this event possible</p>
+            <!-- call for sponsor -->
+            <a href="#cfsponsors" class="inline-block mt-4 text-sm text-violet-400 hover:underline">Interested in sponsoring? Click here!</a>
+        </div>
+        
+        <div class="mt-8">
+            <h3 class="text-lg font-semibold text-center text-violet-300 mb-4">Title Sponsor</h3>
+            <div class="flex justify-center gap-6">
+                <div class="glass-card p-8 w-80 reveal group hover:scale-105 transition-transform">
+                    <img src="/static/image/aws.png" alt="AWS" class="h-16 mx-auto" onerror="this.style.display='none'; this.parentElement.classList.add('bg-neutral-800');"/>
+                    <div class="mt-4 text-center">
+                        <div class="font-semibold">Amazon Web Services</div>
+                        <div class="text-sm text-neutral-400 mt-1">Cloud Computing Platform</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-12">
+            <h3 class="text-lg font-semibold text-center text-amber-400 mb-6">Session Sponsors</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-8 reveal group hover:scale-105 transition-transform flex items-center justify-center col-span-full">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-full flex items-center justify-center mb-4 border border-amber-500/30">
+                            <span class="text-3xl">✨</span>
+                        </div>
+                        <div class="font-semibold text-lg text-amber-400">Coming Soon</div>
+                        <div class="text-sm text-neutral-400 mt-2">Exciting sponsors being finalized</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12">
+            <h3 class="text-lg font-semibold text-center text-yellow-400 mb-6">Booth & Engagement Sponsors</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-8 reveal group hover:scale-105 transition-transform flex items-center justify-center col-span-full">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-full flex items-center justify-center mb-4 border border-yellow-500/30">
+                            <span class="text-3xl">🎪</span>
+                        </div>
+                        <div class="font-semibold text-lg text-yellow-400">Coming Soon</div>
+                        <div class="text-sm text-neutral-400 mt-2">Exciting sponsors being finalized</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <h3 class="text-lg font-semibold text-center text-neutral-300 mb-6">Refreshment & Merchandise Partners</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="glass-card p-8 reveal group hover:scale-105 transition-transform flex items-center justify-center col-span-full">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-gradient-to-br from-neutral-500/20 to-slate-500/20 rounded-full flex items-center justify-center mb-4 border border-neutral-500/30">
+                            <span class="text-3xl">🎁</span>
+                        </div>
+                        <div class="font-semibold text-lg text-neutral-300">Coming Soon</div>
+                        <div class="text-sm text-neutral-400 mt-2">Exciting sponsors being finalized</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="sponsorship-levels" class="section px-4 py-16 bg-neutral-900/30">
+    <div class="mx-auto max-w-6xl">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl sm:text-3xl font-bold">Sponsorship Opportunities</h2>
+            <p class="mt-3 text-neutral-300">Partner with us to reach 500+ developers and tech enthusiasts</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass-card p-6 reveal">
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-violet-500/20 rounded-lg flex items-center justify-center">
+                        <span class="text-2xl">👑</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-violet-300">Title Sponsorship</h3>
+                        <p class="mt-2 text-sm text-neutral-300">Prominent branding across all event media including website, banners, presentations, and promotional materials. Maximum visibility throughout the event.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-card p-6 reveal">
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center">
+                        <span class="text-2xl">🎤</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-amber-400">Session Sponsorships</h3>
+                        <p class="mt-2 text-sm text-neutral-300">Branded technical talks or hands-on labs. Share your expertise and showcase your technology through dedicated sessions with attendees.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-card p-6 reveal">
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                        <span class="text-2xl">🏢</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400">Booth & Engagement Zones</h3>
+                        <p class="mt-2 text-sm text-neutral-300">Showcase products and interact with talent. Premium space to demonstrate your solutions, recruit talent, and engage directly with attendees.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-card p-6 reveal">
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-neutral-500/20 rounded-lg flex items-center justify-center">
+                        <span class="text-2xl">🎁</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-neutral-300">Refreshment or Merchandise Partnership</h3>
+                        <p class="mt-2 text-sm text-neutral-300">Visibility during key breaks and giveaways. Brand exposure through refreshment stations, swag bags, or promotional merchandise distribution.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cfsponsors" class="section px-4">
+    <div class="mx-auto max-w-4xl">
+        <div class="glass-card p-6 sm:p-8 reveal">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center">Call for Sponsors</h2>
+            <p class="mt-2 text-neutral-300 text-center">Support the community and connect with 500+ builders. Tell us about your brand and goals.</p>
+            <div id="sponsorMessage" class="mt-4 hidden"></div>
+            <form id="sponsorForm" class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Company</label>
+                    <input required name="company" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Company name"/>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Contact Name</label>
+                    <input required name="contact" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Your name"/>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Email</label>
+                    <input required name="email" type="email" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="you@company.com"/>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-sm text-neutral-300">Sponsorship Level</label>
+                    <select required name="level" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400">
+                        <option value="" disabled selected>Select a level</option>
+                        <option>Title Sponsorship</option>
+                        <option>Session Sponsorship</option>
+                        <option>Booth & Engagement</option>
+                        <option>Refreshment/Merchandise</option>
+                        <option>Custom Package</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="text-sm text-neutral-300">Notes / Goals</label>
+                    <textarea name="notes" rows="4" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Booth, hiring, swag, product demos, etc."></textarea>
+                </div>
+                <div class="sm:col-span-2 flex justify-center">
+                    <button type="submit" class="btn-primary rounded-md px-6 py-3">Become a Sponsor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+document.getElementById('sponsorForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const messageDiv = document.getElementById('sponsorMessage');
+    
+    try {
+        const response = await fetch('/sponsor', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            messageDiv.className = 'mt-4 p-4 bg-green-500/20 border border-green-500 rounded-md text-green-400';
+            messageDiv.textContent = data.success;
+            this.reset();
+        } else if (data.error) {
+            messageDiv.className = 'mt-4 p-4 bg-red-500/20 border border-red-500 rounded-md text-red-400';
+            messageDiv.textContent = data.error;
+        }
+        
+        messageDiv.classList.remove('hidden');
+        setTimeout(() => messageDiv.classList.add('hidden'), 5000);
+    } catch (error) {
+        messageDiv.className = 'mt-4 p-4 bg-red-500/20 border border-red-500 rounded-md text-red-400';
+        messageDiv.textContent = 'An error occurred. Please try again.';
+        messageDiv.classList.remove('hidden');
+    }
+});
+</script>
+
+{% endblock %}
