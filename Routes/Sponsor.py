@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, flash, redirect, jsonify, request
+from flask_login import current_user
 from Database.mongo import db
 
 sponsor_bp = Blueprint('sponsor',__name__)
@@ -35,4 +36,7 @@ def sponsor():
             }
         )
     else:
+        if current_user.is_authenticated:
+            existing_sponsor = db.sponsor_waitlist.find_one({'email': current_user.email})
+            return render_template('sponsor.html', user=current_user, existing_sponsor=existing_sponsor)
         return render_template('sponsor.html')

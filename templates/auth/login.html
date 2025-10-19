@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<section id="login" class="pt-32">
+    <div class="mx-auto max-w-md">
+        <div class="glass-card p-6 sm:p-8 reveal">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center">Login</h2>
+            <p class="mt-2 text-neutral-300 text-center">Access your account</p>
+            
+            <div id="message" class="mt-4 hidden p-4 rounded-md text-center"></div>
+            
+            <form id="loginForm" class="mt-6 space-y-4">
+                <div>
+                    <label class="text-sm text-neutral-300">Email</label>
+                    <input required name="email" type="email" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="you@example.com"/>
+                </div>
+                
+                <div>
+                    <label class="text-sm text-neutral-300">Password</label>
+                    <input required name="password" type="password" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Enter your password"/>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button type="submit" class="btn-primary rounded-md px-6 py-3 w-full">Login</button>
+                </div>
+            </form>
+            
+            <p class="mt-4 text-center text-sm text-neutral-400">
+                Don't have an account? <a href="{{ url_for('auth.register') }}" class="text-violet-400 hover:text-violet-300">Register</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const messageDiv = document.getElementById('message');
+    
+    try {
+        const response = await fetch('/auth/login', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+            messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-green-500/20 text-green-300';
+            messageDiv.textContent = data.message;
+            messageDiv.classList.remove('hidden');
+            
+            setTimeout(() => {
+                window.location.href = '/dashboard';
+            }, 1000);
+        } else {
+            messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-red-500/20 text-red-300';
+            messageDiv.textContent = data.message;
+            messageDiv.classList.remove('hidden');
+        }
+    } catch (error) {
+        messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-red-500/20 text-red-300';
+        messageDiv.textContent = 'Failed to login. Please try again.';
+        messageDiv.classList.remove('hidden');
+    }
+});
+</script>
+
+{% endblock %}

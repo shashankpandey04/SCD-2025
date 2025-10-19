@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - AWS SCD 2025{% endblock %}
+{% block content %}
+
+<div id="bg-animated" style="position:relative; overflow:hidden;">
+    <canvas id="animated-bg-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+    
+    <section id="dashboard" class="pt-32 pb-16 px-4">
+        <div class="mx-auto max-w-6xl">
+            <!-- Welcome Section -->
+            <div class="glass-card p-6 sm:p-8 reveal mb-6">
+                <h1 class="text-3xl sm:text-4xl font-bold">Welcome back, {{ user.first_name }}! 👋</h1>
+                <p class="mt-2 text-neutral-300">Registration ID: <span class="text-violet-400 font-mono">{{ user.id }}</span></p>
+                <p class="mt-1 text-neutral-300">{{ user.email }}</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div class="glass-card p-4 reveal text-center">
+                    <div class="text-3xl font-bold text-violet-400">{{ dashboard_data.speakers|list|length }}</div>
+                    <div class="mt-1 text-sm text-neutral-300">Speaker Proposals</div>
+                </div>
+                <div class="glass-card p-4 reveal text-center">
+                    <div class="text-3xl font-bold text-amber-400">{{ dashboard_data.tickets|list|length }}</div>
+                    <div class="mt-1 text-sm text-neutral-300">Event Tickets</div>
+                </div>
+                <div class="glass-card p-4 reveal text-center">
+                    <div class="text-3xl font-bold text-green-400">{% if dashboard_data.sponsor %}1{% else %}0{% endif %}</div>
+                    <div class="mt-1 text-sm text-neutral-300">Sponsor Requests</div>
+                </div>
+            </div>
+
+            <!-- Speaker Proposals Section -->
+            <div class="glass-card p-6 sm:p-8 reveal mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Your Speaker Proposals</h2>
+                    <a href="/speakers" class="text-sm text-violet-400 hover:text-violet-300">Submit New →</a>
+                </div>
+                
+                {% if dashboard_data.speakers|list|length > 0 %}
+                    <div class="space-y-4">
+                        {% for speaker in dashboard_data.speakers %}
+                        <div class="bg-neutral-800/50 border border-neutral-700 rounded-lg p-4">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-lg">{{ speaker.title }}</h3>
+                                    <p class="text-sm text-neutral-400 mt-1">Track: {{ speaker.track }}</p>
+                                    <p class="text-sm text-neutral-300 mt-2">{{ speaker.abstract[:150] }}{% if speaker.abstract|length > 150 %}...{% endif %}</p>
+                                    <div class="flex items-center gap-4 mt-3 text-xs text-neutral-400">
+                                        <span>Level: {{ speaker.level }}</span>
+                                        {% if speaker.links %}
+                                        <a href="{{ speaker.links }}" target="_blank" class="text-violet-400 hover:underline">View Links</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    {% if speaker.status == 'pending' %}
+                                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">
+                                        Pending
+                                    </span>
+                                    {% elif speaker.status == 'accepted' %}
+                                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-green-500/20 text-green-400 border border-green-500/30">
+                                        Accepted
+                                    </span>
+                                    {% elif speaker.status == 'rejected' %}
+                                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-red-500/20 text-red-400 border border-red-500/30">
+                                        Rejected
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-8">
+                        <div class="text-neutral-400 mb-4">
+                            <svg class="w-16 h-16 mx-auto opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-neutral-300">You haven't submitted any speaker proposals yet.</p>
+                        <a href="/speakers" class="inline-block mt-4 btn-primary rounded-md px-6 py-3">Submit a Proposal</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Tickets Section -->
+            <div class="glass-card p-6 sm:p-8 reveal mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Your Event Tickets</h2>
+                    <a href="/waitlist" class="text-sm text-violet-400 hover:text-violet-300">Get Tickets →</a>
+                </div>
+                
+                {% if dashboard_data.tickets|list|length > 0 %}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {% for ticket in dashboard_data.tickets %}
+                        <div class="bg-gradient-to-br from-violet-500/10 to-purple-500/10 border border-violet-500/30 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold uppercase tracking-wide text-violet-300">Event Ticket</span>
+                                {% if ticket.status == 'paid' %}
+                                <span class="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400">Confirmed</span>
+                                {% elif ticket.status == 'pending' %}
+                                <span class="text-xs px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400">Pending</span>
+                                {% endif %}
+                            </div>
+                            <div class="text-lg font-bold">{{ user.first_name }} {{ user.last_name }}</div>
+                            <div class="text-sm text-neutral-300 mt-1">{{ ticket.ticket_type|default('General Admission') }}</div>
+                            <div class="mt-3 pt-3 border-t border-violet-500/20">
+                                <div class="flex justify-between text-xs text-neutral-400">
+                                    <span>Order ID:</span>
+                                    <span class="font-mono text-violet-400">{{ ticket.order_id|default('N/A') }}</span>
+                                </div>
+                                {% if ticket.amount %}
+                                <div class="flex justify-between text-xs text-neutral-400 mt-1">
+                                    <span>Amount:</span>
+                                    <span class="text-green-400">₹{{ ticket.amount }}</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="mt-4 p-4 bg-neutral-800/50 border border-neutral-700 rounded-lg">
+                        <p class="text-sm text-neutral-300">
+                            <span class="font-semibold">Early Bird Price:</span> ₹{{ dashboard_data.early_bird_price }} | 
+                            <span class="font-semibold">Regular Price:</span> ₹{{ dashboard_data.regular_price }}
+                        </p>
+                    </div>
+                {% else %}
+                    <div class="text-center py-8">
+                        <div class="text-neutral-400 mb-4">
+                            <svg class="w-16 h-16 mx-auto opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-neutral-300">You don't have any tickets yet.</p>
+                        <a href="/waitlist" class="inline-block mt-4 btn-primary rounded-md px-6 py-3">Join Waitlist</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Sponsor Request Section -->
+            <div class="glass-card p-6 sm:p-8 reveal mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Sponsorship Request</h2>
+                    {% if not dashboard_data.sponsor %}
+                    <a href="/sponsor#cfsponsors" class="text-sm text-violet-400 hover:text-violet-300">Submit Request →</a>
+                    {% endif %}
+                </div>
+                
+                {% if dashboard_data.sponsor %}
+                    <div class="bg-neutral-800/50 border border-neutral-700 rounded-lg p-4">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-lg">{{ dashboard_data.sponsor.company }}</h3>
+                                <p class="text-sm text-neutral-400 mt-1">Contact: {{ dashboard_data.sponsor.contact }}</p>
+                                <p class="text-sm text-neutral-400">Email: {{ dashboard_data.sponsor.email }}</p>
+                                <div class="mt-3">
+                                    <span class="text-xs font-semibold uppercase tracking-wide text-violet-300">Sponsorship Level:</span>
+                                    <span class="ml-2 text-sm text-neutral-300">{{ dashboard_data.sponsor.level }}</span>
+                                </div>
+                                {% if dashboard_data.sponsor.notes %}
+                                <div class="mt-3">
+                                    <span class="text-xs font-semibold uppercase tracking-wide text-violet-300">Notes:</span>
+                                    <p class="text-sm text-neutral-300 mt-1">{{ dashboard_data.sponsor.notes }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="ml-4">
+                                <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">
+                                    Under Review
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+                        <p class="text-sm text-blue-300">
+                            <strong>Thank you for your interest!</strong> Our team will review your sponsorship request and get back to you soon.
+                        </p>
+                    </div>
+                {% else %}
+                    <div class="text-center py-8">
+                        <div class="text-neutral-400 mb-4">
+                            <svg class="w-16 h-16 mx-auto opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-neutral-300">You haven't submitted a sponsorship request yet.</p>
+                        <a href="/sponsor#cfsponsors" class="inline-block mt-4 btn-primary rounded-md px-6 py-3">Become a Sponsor</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Profile Section -->
+            <div class="glass-card p-6 sm:p-8 reveal">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Your Profile</h2>
+                    <a href="/dashboard/profile" class="text-sm text-violet-400 hover:text-violet-300">Edit Profile →</a>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-wide text-neutral-400">Full Name</span>
+                        <p class="text-neutral-200 mt-1">{{ user.first_name }} {{ user.last_name }}</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-wide text-neutral-400">Email</span>
+                        <p class="text-neutral-200 mt-1">{{ user.email }}</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-wide text-neutral-400">Phone Number</span>
+                        <p class="text-neutral-200 mt-1">{{ user.number }}</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-wide text-neutral-400">Company</span>
+                        <p class="text-neutral-200 mt-1">{{ user.company }}</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-wide text-neutral-400">Role</span>
+                        <p class="text-neutral-200 mt-1">{{ user.role }}</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-wide text-neutral-400">Registration ID</span>
+                        <p class="text-violet-400 mt-1 font-mono text-sm">{{ user.id }}</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 pt-6 border-t border-neutral-700">
+                    <a href="{{ url_for('auth.logout') }}" class="inline-block px-6 py-2 bg-red-500/20 text-red-400 border border-red-500/30 rounded-md hover:bg-red-500/30 transition-colors">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

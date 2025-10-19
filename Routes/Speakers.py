@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, flash, redirect, request, jsonify
+from flask import Blueprint, render_template, request, jsonify
+from flask_login import current_user
 from Database.mongo import db
 
 speaker_bp = Blueprint('speakers',__name__)
@@ -15,7 +16,7 @@ def speakers():
         links = (request.form.get('link') or '').strip()
 
         if not (name and email and title and track and abstract and level):
-            jsonify({'error': 'Please fill in all required fields for Call for Speakers.'}), 400
+            return jsonify({'error': 'Please fill in all required fields for Call for Speakers.'}), 400
 
         db.speaker_waitlist.insert_one(
             {
@@ -25,7 +26,8 @@ def speakers():
                 'track': track,
                 'abstract': abstract,
                 'level': level,
-                'links': links
+                'links': links,
+                'status': 'pending'
             }
         )
 
@@ -35,4 +37,8 @@ def speakers():
             }
         )
     else:
-        return render_template('speaker.html')
+        if current_user.is_authenticated:
+            already_applied = db.speaker_waitlist.find_one({'email': current_user.email})
+            return render_template('speaker.html', user=current_user, already_applied=already_applied)
+        else:
+            return render_template('speaker.html', user=None)

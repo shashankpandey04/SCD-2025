@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<section id="register" class="pt-32">
+    <div class="mx-auto max-w-md">
+        <div class="glass-card p-6 sm:p-8 reveal">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center">Register</h2>
+            <p class="mt-2 text-neutral-300 text-center">Create your account</p>
+            
+            <div id="message" class="mt-4 hidden p-4 rounded-md text-center"></div>
+            
+            <form id="registerForm" class="mt-6 space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-sm text-neutral-300">First Name</label>
+                        <input required name="first_name" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="John"/>
+                    </div>
+                    <div>
+                        <label class="text-sm text-neutral-300">Last Name</label>
+                        <input required name="last_name" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Doe"/>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="text-sm text-neutral-300">Email</label>
+                    <input required name="email" type="email" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="you@example.com"/>
+                </div>
+                
+                <div>
+                    <label class="text-sm text-neutral-300">Password</label>
+                    <input required name="password" type="password" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Enter your password"/>
+                </div>
+                
+                <div>
+                    <label class="text-sm text-neutral-300">Phone Number</label>
+                    <input required name="number" type="tel" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="+91 1234567890"/>
+                </div>
+                
+                <div>
+                    <label class="text-sm text-neutral-300">Company</label>
+                    <input required name="company" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Company Name"/>
+                </div>
+                
+                <div>
+                    <label class="text-sm text-neutral-300">Role</label>
+                    <input required name="role" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Your Role"/>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button type="submit" class="btn-primary rounded-md px-6 py-3 w-full">Register</button>
+                </div>
+            </form>
+            
+            <p class="mt-4 text-center text-sm text-neutral-400"></p>
+                Already have an account? <a href="{{ url_for('auth.login') }}" class="text-violet-400 hover:text-violet-300">Login</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<script>
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const messageDiv = document.getElementById('message');
+    
+    try {
+        const response = await fetch('/auth/register', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+            messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-green-500/20 text-green-300';
+            messageDiv.textContent = data.message;
+            messageDiv.classList.remove('hidden');
+            
+            // Redirect to login after a short delay
+            setTimeout(() => {
+                window.location.href = '/auth/login';
+            }, 1500);
+        } else {
+            messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-red-500/20 text-red-300';
+            messageDiv.textContent = data.message;
+            messageDiv.classList.remove('hidden');
+        }
+    } catch (error) {
+        messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-red-500/20 text-red-300';
+        messageDiv.textContent = 'Failed to register. Please try again.';
+        messageDiv.classList.remove('hidden');
+    }
+});
+</script>
+
+{% endblock %}
