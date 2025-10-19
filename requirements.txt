@@ -3,3 +3,4 @@ python-dotenv
 pymongo
 cashfree_pg
 argon2-cffi
+flask_login
