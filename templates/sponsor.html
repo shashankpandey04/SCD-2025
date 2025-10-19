@@ -1,134 +1,109 @@
 {% extends "base.html" %}
 {% block title %}Join the Waitlist{% endblock %}
 {% block content %}
-
 <div id="bg-animated" style="position:relative; overflow:hidden;">
     <canvas id="animated-bg-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+
     <section id="sponsors" class="pt-32">
         <div class="mx-auto max-w-6xl">
-            <div class="text-center">
-                <h2 class="text-2xl sm:text-3xl font-bold">Our Sponsors</h2>
-                <p class="mt-3 text-neutral-300">Thank you to our amazing partners who make this event possible</p>
-                <!-- call for sponsor -->
-                <a href="#cfsponsors" class="inline-block mt-4 text-sm text-violet-400 hover:underline">Interested in sponsoring? Click here!</a>
-            </div>
-            
-            <div class="mt-8">
-                <h3 class="text-lg font-semibold text-center text-violet-300 mb-4">Title Sponsor</h3>
-                <div class="flex justify-center gap-6">
-                    <div class="glass-card p-8 w-80 reveal group hover:scale-105 transition-transform">
-                        <img src="/static/image/aws.png" alt="AWS" class="h-16 mx-auto" onerror="this.style.display='none'; this.parentElement.classList.add('bg-neutral-800');"/>
-                        <div class="mt-4 text-center">
-                            <div class="font-semibold">Amazon Web Services</div>
-                            <div class="text-sm text-neutral-400 mt-1">Cloud Computing Platform</div>
-                        </div>
-                    </div>
+        <div class="text-center">
+            <h2 class="text-3xl font-bold">Our Sponsors</h2>
+            <p class="mt-3 text-neutral-300">Thank you to our amazing partners who make this event possible</p>
+            <a href="#cfsponsors" class="inline-block mt-4 text-sm text-violet-400 hover:underline">Interested in sponsoring? Click here!</a>
+        </div>
+
+        <!-- 🟣 Title Sponsors -->
+        <div class="mt-16">
+            <h3 class="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 mb-10 tracking-wide">
+            Title Sponsors
+            </h3>
+
+            <div class="flex flex-wrap justify-center gap-10">
+
+            <!-- AWS -->
+            <div class="relative bg-gradient-to-br from-violet-900/50 to-black/60 border border-violet-400/40 
+                        backdrop-blur-xl rounded-3xl p-10 w-80 sm:w-96 text-center shadow-[0_0_40px_rgba(139,92,246,0.5)]
+                        hover:scale-105 hover:shadow-[0_0_60px_rgba(139,92,246,0.7)] transition-all duration-500 group">
+                <div class="absolute -top-3 right-4 text-xs bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-3 py-1 rounded-full shadow-md">
+                Powered By
                 </div>
-            </div>
-            
-            <div class="mt-12">
-                <h3 class="text-lg font-semibold text-center text-amber-400 mb-6">Session Sponsors</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="glass-card p-8 reveal group hover:scale-105 transition-transform flex items-center justify-center col-span-full">
-                        <div class="text-center">
-                            <div class="w-16 h-16 mx-auto bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-full flex items-center justify-center mb-4 border border-amber-500/30">
-                                <span class="text-3xl">✨</span>
-                            </div>
-                            <div class="font-semibold text-lg text-amber-400">Coming Soon</div>
-                            <div class="text-sm text-neutral-400 mt-2">Exciting sponsors being finalized</div>
-                        </div>
-                    </div>
-                </div>
+                <img src="/static/image/aws.png" alt="Amazon Web Services"
+                class="h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-500" />
+                <div class="font-semibold text-lg text-white">Amazon Web Services (AWS)</div>
+                <p class="text-sm text-neutral-400 mt-2">Official Title Partner</p>
             </div>
 
-            <div class="mt-12">
-                <h3 class="text-lg font-semibold text-center text-yellow-400 mb-6">Booth & Engagement Sponsors</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="glass-card p-8 reveal group hover:scale-105 transition-transform flex items-center justify-center col-span-full">
-                        <div class="text-center">
-                            <div class="w-16 h-16 mx-auto bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-full flex items-center justify-center mb-4 border border-yellow-500/30">
-                                <span class="text-3xl">🎪</span>
-                            </div>
-                            <div class="font-semibold text-lg text-yellow-400">Coming Soon</div>
-                            <div class="text-sm text-neutral-400 mt-2">Exciting sponsors being finalized</div>
-                        </div>
-                    </div>
+            <!-- LPU -->
+            <div class="relative bg-gradient-to-br from-amber-800/40 to-black/60 border border-amber-300/40 
+                        backdrop-blur-xl rounded-3xl p-10 w-80 sm:w-96 text-center shadow-[0_0_40px_rgba(251,191,36,0.4)]
+                        hover:scale-105 hover:shadow-[0_0_60px_rgba(251,191,36,0.7)] transition-all duration-500 group">
+                <div class="absolute -top-3 right-4 text-xs bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-3 py-1 rounded-full shadow-md">
+                Venue Partner
                 </div>
+                <img src="/static/image/LPU Logo DesIgn (Community).png" alt="Lovely Professional University"
+                class="h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-500" />
+                <div class="font-semibold text-lg text-white">Lovely Professional University</div>
+                <p class="text-sm text-neutral-400 mt-2">Strategic & Venue Partner</p>
             </div>
 
-            <div class="mt-10">
-                <h3 class="text-lg font-semibold text-center text-neutral-300 mb-6">Refreshment & Merchandise Partners</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
-                    <div class="glass-card p-8 reveal group hover:scale-105 transition-transform flex items-center justify-center col-span-full">
-                        <div class="text-center">
-                            <div class="w-16 h-16 mx-auto bg-gradient-to-br from-neutral-500/20 to-slate-500/20 rounded-full flex items-center justify-center mb-4 border border-neutral-500/30">
-                                <span class="text-3xl">🎁</span>
-                            </div>
-                            <div class="font-semibold text-lg text-neutral-300">Coming Soon</div>
-                            <div class="text-sm text-neutral-400 mt-2">Exciting sponsors being finalized</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </section>
 
-    <section id="sponsorship-levels" class="section px-4 py-16 bg-neutral-900/30">
-        <div class="mx-auto max-w-6xl">
-            <div class="text-center mb-12">
-                <h2 class="text-2xl sm:text-3xl font-bold">Sponsorship Opportunities</h2>
-                <p class="mt-3 text-neutral-300">Partner with us to reach 500+ developers and tech enthusiasts</p>
+        <!-- 🌐 Digital Partner -->
+        <div class="mt-16">
+            <h3 class="text-2xl font-semibold text-center text-sky-400 mb-8 tracking-wide">Digital & Learning Partners</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            <div class="bg-gradient-to-br from-sky-500/20 to-cyan-700/20 border border-sky-500/40 
+                        rounded-2xl backdrop-blur-md p-8 w-72 text-center hover:scale-105 
+                        hover:shadow-[0_0_25px_rgba(56,189,248,0.5)] transition-all duration-500 group">
+                <img src="/static/image/xyz-logo-white.png" alt=".XYZ Logo"
+                class="h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-500" />
+                <div class="font-semibold text-lg text-sky-400">.XYZ</div>
+                <p class="text-sm text-neutral-400 mt-1">Premium Domain Extensions for Innovators</p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-card p-6 reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-violet-500/20 rounded-lg flex items-center justify-center">
-                            <span class="text-2xl">👑</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-violet-300">Title Sponsorship</h3>
-                            <p class="mt-2 text-sm text-neutral-300">Prominent branding across all event media including website, banners, presentations, and promotional materials. Maximum visibility throughout the event.</p>
-                        </div>
-                    </div>
+
+            <div class="bg-neutral-900/40 border border-sky-300/20 rounded-2xl p-8 w-72 text-center 
+                        flex flex-col items-center justify-center hover:scale-105 transition-all duration-500">
+                <div class="w-16 h-16 bg-gradient-to-br from-sky-500/20 to-cyan-500/20 rounded-full flex items-center justify-center mb-4 border border-sky-500/30">
+                <span class="text-3xl">🌐</span>
                 </div>
-                
-                <div class="glass-card p-6 reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center">
-                            <span class="text-2xl">🎤</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-amber-400">Session Sponsorships</h3>
-                            <p class="mt-2 text-sm text-neutral-300">Branded technical talks or hands-on labs. Share your expertise and showcase your technology through dedicated sessions with attendees.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-card p-6 reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                            <span class="text-2xl">🏢</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-yellow-400">Booth & Engagement Zones</h3>
-                            <p class="mt-2 text-sm text-neutral-300">Showcase products and interact with talent. Premium space to demonstrate your solutions, recruit talent, and engage directly with attendees.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-card p-6 reveal">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-neutral-500/20 rounded-lg flex items-center justify-center">
-                            <span class="text-2xl">🎁</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-neutral-300">Refreshment or Merchandise Partnership</h3>
-                            <p class="mt-2 text-sm text-neutral-300">Visibility during key breaks and giveaways. Brand exposure through refreshment stations, swag bags, or promotional merchandise distribution.</p>
-                        </div>
-                    </div>
-                </div>
+                <div class="font-semibold text-lg text-sky-400">Coming Soon</div>
+                <p class="text-sm text-neutral-400 mt-2">Exciting sponsors being finalized</p>
             </div>
+            </div>
+        </div>
+
+        <!-- 🎤 Session Sponsors -->
+        <div class="mt-16">
+            <h3 class="text-2xl font-semibold text-center text-amber-400 mb-8 tracking-wide">Session Sponsors</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            <div class="bg-gradient-to-br from-amber-600/20 to-orange-700/20 border border-amber-400/40 
+                        rounded-2xl backdrop-blur-md p-8 w-72 text-center hover:scale-105 
+                        hover:shadow-[0_0_25px_rgba(251,191,36,0.5)] transition-all duration-500">
+                <div class="w-16 h-16 bg-gradient-to-br from-amber-500/30 to-orange-400/30 rounded-full flex items-center justify-center mb-4 border border-amber-400/40">
+                <span class="text-3xl">🎤</span>
+                </div>
+                <div class="font-semibold text-lg text-amber-400">Coming Soon</div>
+                <p class="text-sm text-neutral-400 mt-2">Exciting sponsors being finalized</p>
+            </div>
+            </div>
+        </div>
+
+        <!-- 🏢 Booth & Engagement -->
+        <div class="mt-16">
+            <h3 class="text-2xl font-semibold text-center text-yellow-400 mb-8 tracking-wide">Booth & Engagement Sponsors</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            <div class="bg-gradient-to-br from-yellow-600/20 to-amber-700/20 border border-yellow-400/30 
+                        rounded-2xl backdrop-blur-md p-8 w-72 text-center hover:scale-105 
+                        hover:shadow-[0_0_25px_rgba(250,204,21,0.4)] transition-all duration-500">
+                <div class="w-16 h-16 bg-gradient-to-br from-yellow-500/30 to-amber-400/30 rounded-full flex items-center justify-center mb-4 border border-yellow-400/40">
+                <span class="text-3xl">🎪</span>
+                </div>
+                <div class="font-semibold text-lg text-yellow-400">Coming Soon</div>
+                <p class="text-sm text-neutral-400 mt-2">Exciting sponsors being finalized</p>
+            </div>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -158,7 +133,8 @@
                             <option>Title Sponsorship</option>
                             <option>Session Sponsorship</option>
                             <option>Booth & Engagement</option>
-                            <option>Refreshment/Merchandise</option>
+                            <option>Community Partner</option>
+                            <option>Digital Partner / Learning Resource Partner</option>
                             <option>Custom Package</option>
                         </select>
                     </div>

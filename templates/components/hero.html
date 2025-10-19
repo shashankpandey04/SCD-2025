@@ -1,38 +1,99 @@
-<section class="hero section px-4 pt-52 sm:pt-32">
-    <div class="absolute inset-0 -z-10">
-        <canvas id="hero-canvas" class="w-full h-full block"></canvas>
-    </div>
-    <div class="mx-auto max-w-6xl text-center">
-        <div class="badge inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs text-neutral-200">
-            <span>14 Nov 2025 • Jalandhar</span>
-            <span class="w-1 h-1 rounded-full bg-neutral-400"></span>
-            <span>Developer Conference</span>
-        </div>
-        <h1 class="mt-6 text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
-            <span class="block">AWS Student Community Day</span>
-            <span class="block text-gradient">Jalandhar 2025</span>
-        </h1>
-        <p class="mt-5 mx-auto max-w-2xl text-neutral-300">
-            The Official Annual Student Developer Conference on Cloud, AI, and Innovation.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <!-- <a href="#register" class="btn-primary inline-flex items-center justify-center rounded-md px-5 py-3">Register Now</a> -->
-            <a href="#agenda" class="btn-primary inline-flex items-center justify-center rounded-md px-5 py-3">View Agenda</a>
-        </div>
+<section class="hero section px-6 pt-52 sm:pt-40 relative overflow-hidden">
 
-        <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 px-2">
-            <div class="glass-card tilt-sm p-5 reveal" data-parallax="0.08">
-                <div class="text-sm text-neutral-400">Keynote</div>
-                <div class="mt-2 text-lg font-semibold">India’s Tech Revolution: AI, Cloud, and the Future Workforce</div>
-            </div>
-            <div class="glass-card tilt-sm p-5 reveal" data-parallax="0.04">
-                <div class="text-sm text-neutral-400">Workshop</div>
-                <div class="mt-2 text-lg font-semibold">From Code to Cloud: Building Hands-On with AWS</div>
-            </div>
-            <div class="glass-card tilt-sm p-5 reveal" data-parallax="0.06">
-                <div class="text-sm text-neutral-400">Panel</div>
-                <div class="mt-2 text-lg font-semibold">Modern Cloud Architectures: The Future of Tech in India: AI, Cloud, Web3 & Cybersecurity</div>
-            </div>
-        </div>
-    </div>
-</section>
+  <!-- Animated Background Layer -->
+  <div class="absolute inset-0 -z-10">
+      <canvas id="hero-canvas" class="w-full h-full block opacity-80"></canvas>
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0d0d12]/80 via-[#0d0d12]/40 to-[#0d0d12]/90 backdrop-blur-[2px]"></div>
+  </div>
+
+  <div class="mx-auto max-w-6xl text-center relative z-10">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 rounded-full border border-violet-400/40 
+                  bg-violet-500/10 px-4 py-1.5 text-xs font-medium text-violet-200 
+                  backdrop-blur-sm animate-fade-in-up">
+          <span>14 Nov 2025 • Jalandhar</span>
+          <span class="w-1 h-1 rounded-full bg-violet-300"></span>
+          <span>Developer Conference</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="mt-8 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight 
+                 animate-fade-in-up [animation-delay:0.1s]">
+          <span class="block text-neutral-100">AWS Student Community Day</span>
+          <span class="block bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 
+                        text-transparent bg-clip-text animate-gradient">
+              Jalandhar 2025
+          </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="mt-6 mx-auto max-w-2xl text-neutral-300 text-lg animate-fade-in-up [animation-delay:0.2s]">
+          The premier annual student developer conference on <span class="text-violet-300 font-medium">Cloud</span>, 
+          <span class="text-fuchsia-300 font-medium">AI</span>, and <span class="text-pink-300 font-medium">Innovation</span>.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up [animation-delay:0.3s]">
+          <a href="#register" 
+             class="btn-primary inline-flex items-center justify-center rounded-xl px-6 py-3 text-base font-semibold shadow-lg hover:shadow-violet-500/30">
+             Register Now
+          </a>
+          <a href="#agenda" 
+             class="inline-flex items-center justify-center rounded-xl px-6 py-3 text-base font-semibold border border-violet-400/30 
+                    hover:bg-violet-500/10 text-violet-200 transition-colors">
+             View Agenda
+          </a>
+      </div>
+
+      <!-- Highlight Cards -->
+      <div class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 px-4">
+          <!-- Keynote -->
+          <div class="glass-card tilt-sm p-6 backdrop-blur-md bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 
+                      border border-violet-500/30 rounded-2xl transition-all hover:scale-[1.03] hover:border-violet-400/50">
+              <div class="text-sm text-neutral-400">Keynote</div>
+              <div class="mt-2 text-lg font-semibold text-neutral-100">
+                  India’s Tech Revolution: AI, Cloud, and the Future Workforce
+              </div>
+          </div>
+
+          <!-- Workshop -->
+          <div class="glass-card tilt-sm p-6 backdrop-blur-md bg-gradient-to-br from-fuchsia-500/10 to-pink-500/10 
+                      border border-fuchsia-500/30 rounded-2xl transition-all hover:scale-[1.03] hover:border-fuchsia-400/50">
+              <div class="text-sm text-neutral-400">Workshop</div>
+              <div class="mt-2 text-lg font-semibold text-neutral-100">
+                  From Code to Cloud: Building Hands-On with AWS
+              </div>
+          </div>
+
+          <!-- Panel -->
+          <div class="glass-card tilt-sm p-6 backdrop-blur-md bg-gradient-to-br from-pink-500/10 to-violet-500/10 
+                      border border-pink-500/30 rounded-2xl transition-all hover:scale-[1.03] hover:border-pink-400/50">
+              <div class="text-sm text-neutral-400">Panel</div>
+              <div class="mt-2 text-lg font-semibold text-neutral-100">
+                  Modern Cloud Architectures: The Future of Tech in India — AI, Cloud, Web3 & Cybersecurity
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+<!-- Small helper animations -->
+<style>
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out both;
+  }
+  .animate-gradient {
+    background-size: 200% auto;
+    animation: gradient-flow 5s ease infinite;
+  }
+  @keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+</style>

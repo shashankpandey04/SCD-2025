@@ -33,7 +33,8 @@ def load_user(user_id):
             email=user_data['email'],
             number=user_data['number'],
             company=user_data['company'],
-            role=user_data['role']
+            role=user_data['role'],
+            admin=user_data.get('admin', 0)
         )
     return None
 

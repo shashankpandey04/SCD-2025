@@ -51,7 +51,8 @@ def login():
             email=user_data['email'],
             number=user_data['number'],
             company=user_data['company'],
-            role=user_data['role']
+            role=user_data['role'],
+            admin=user_data.get('admin', 0)
         )
         login_user(user)
         return jsonify({
@@ -95,7 +96,8 @@ def register():
             "password": hashed_password,
             "number": number,
             "company": company,
-            "role": role
+            "role": role,
+            "admin": 0  #0: regular user, 1: admin
         }
 
         db.users.insert_one(user_data)

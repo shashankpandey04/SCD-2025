@@ -1,106 +1,101 @@
 {% extends "base.html" %}
 {% block title %}AWS Student Community Day Jalandhar 2025{% endblock %}
 {% block content %}
-<div id="bg-animated" style="position:relative; overflow:hidden;">
-    <canvas id="animated-bg-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
-    {% include 'components/hero.html' %}
+<div id="bg-animated" class="relative overflow-hidden">
+  <canvas id="animated-bg-canvas" class="absolute inset-0 w-full h-full z-0 pointer-events-none"></canvas>
 
-    <section id="about" class="section px-4">
-        <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold">About the Event</h2>
-            <p class="mt-4 text-neutral-300">
-                AWS Student Community Day Jalandhar 2025 is the premier annual conference for student developers passionate about cloud computing, AI, and innovation. Hosted by the AWS Cloud Club at Lovely Professional University, this event brings together over 500 students, educators, and industry leaders for a day of learning, networking, and hands-on experiences.
-            </p>
-            <p class="mt-4 text-neutral-300">
-                Attendees will explore the latest in AWS technologies, including serverless computing, machine learning, cybersecurity, and Web3. The conference features keynote speeches from industry experts, technical sessions led by AWS professionals and community members, interactive workshops, and panel discussions on emerging trends in technology.
-            </p>
-            <p class="mt-4 text-neutral-300">
-                Whether you're a beginner looking to get started with cloud or an experienced developer aiming to deepen your skills, AWS Student Community Day Jalandhar 2025 offers something for everyone. Join us for a day of inspiration, education, and community building as we explore the future of technology together.
-            </p>
+  {% include 'components/hero.html' %}
+
+  <!-- 🌟 About -->
+  <section id="about" class="section px-4 relative z-10">
+    <div class="mx-auto max-w-4xl text-center">
+      <h2 class="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">About the Event</h2>
+      <div class="mt-6 space-y-4 text-neutral-300 leading-relaxed text-base sm:text-lg">
+        <p>
+          <span class="text-violet-400 font-semibold">AWS Student Community Day Jalandhar 2025</span> is the premier annual conference for student developers passionate about cloud computing, AI, and innovation.
+        </p>
+        <p>
+          Hosted by the <span class="text-violet-400 font-semibold">AWS Cloud Club at Lovely Professional University</span>, this event connects over 500 builders, educators, and industry leaders for a full day of learning, networking, and inspiration.
+        </p>
+        <p>
+          Dive deep into the world of <span class="text-fuchsia-400 font-semibold">AI, Web3, Serverless, and Cybersecurity</span> through workshops, keynotes, and panel discussions that prepare you for the future of tech.
+        </p>
+      </div>
+      <a href="#register" class="mt-8 inline-block bg-violet-600/80 hover:bg-violet-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-violet-500/40 transition-all duration-300">Register Now</a>
+    </div>
+  </section>
+
+  <!-- ⚙️ Agenda -->
+  <section id="agenda" class="section px-4 relative z-10">
+    <div class="mx-auto max-w-6xl">
+      <h2 class="text-3xl font-extrabold text-center bg-gradient-to-r from-violet-300 to-sky-400 bg-clip-text text-transparent">Agenda Highlights</h2>
+
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {% set agenda_items = [
+          ("🚀", "Opening Keynote: India’s Tech Revolution", "Exploring how AI, Cloud, and emerging technologies are transforming India’s digital future."),
+          ("☁️", "Session Track: Building with AWS", "Dive into AI, Web3, and Cloud with live demos, real-world case studies, and expert-led sessions."),
+          ("⚡", "Workshop: From Code to Cloud", "Build and deploy serverless apps with Lambda, API Gateway, and more."),
+          ("💬", "Panel: Future of Tech in India", "Industry experts discuss innovation, careers, and challenges shaping India’s digital ecosystem."),
+          ("🏆", "Student Activities & Challenges", "Engage in AWS-powered activities. Win credits, rewards, and exclusive goodies."),
+          ("🤝", "Networking & Closing Ceremony", "Meet mentors, speakers, and fellow builders — and wrap up the day with highlights.")
+        ] %}
+        {% for icon, title, desc in agenda_items %}
+        <article class="glass-card p-6 reveal hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(139,92,246,0.4)] transition-all duration-500">
+          <div class="text-3xl">{{ icon }}</div>
+          <h3 class="mt-3 font-semibold text-lg text-white">{{ title }}</h3>
+          <p class="mt-2 text-neutral-300">{{ desc }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- 🎤 Speakers -->
+  <section id="speakers" class="section px-4 relative z-10">
+    <div class="mx-auto max-w-5xl text-center">
+      <h2 class="text-3xl font-extrabold bg-gradient-to-r from-fuchsia-400 to-violet-400 bg-clip-text text-transparent">Speakers</h2>
+      <p class="mt-3 text-neutral-300">Our lineup of inspiring speakers will be revealed soon.</p>
+
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for i in range(3) %}
+        <div class="bg-gradient-to-br from-violet-600/10 to-fuchsia-600/10 border border-violet-400/30 rounded-2xl backdrop-blur-md p-8 text-center hover:scale-105 transition-all duration-500">
+          <div class="w-20 h-20 mx-auto bg-gradient-to-br from-violet-500/30 to-fuchsia-500/30 rounded-full flex items-center justify-center mb-4 border border-violet-400/40">
+            <span class="text-3xl">🎤</span>
+          </div>
+          <div class="font-semibold text-lg text-white">To Be Announced</div>
+          <p class="text-sm text-neutral-400 mt-2">Stay tuned for exciting speaker reveals</p>
         </div>
-    </section>
+        {% endfor %}
+      </div>
 
-    <section id="agenda" class="section px-4">
-        <div class="mx-auto max-w-6xl">
-            <h2 class="text-2xl sm:text-3xl font-bold text-center">Agenda Highlights</h2>
+      <a href="/speakers" class="mt-8 inline-block bg-fuchsia-600/80 hover:bg-fuchsia-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-fuchsia-500/40 transition-all duration-300">Submit a Talk</a>
+    </div>
+  </section>
 
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <article class="glass-card p-6 reveal">
-                <h3 class="mt-2 font-semibold">Opening Keynote: India’s Tech Revolution</h3>
-                <p class="mt-2 text-neutral-300">
-                Exploring how AI, Cloud, and emerging technologies are transforming India’s digital future and shaping tomorrow’s innovators.
-                </p>
-            </article>
+  <!-- 📍 Venue -->
+  <section id="venue" class="section px-4 relative z-10">
+    <div class="mx-auto max-w-6xl grid md:grid-cols-2 gap-10 items-center">
+      <div class="reveal">
+        <h2 class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent">Venue</h2>
+        <p class="mt-4 text-neutral-300 leading-relaxed">
+          <span class="font-semibold text-amber-400">Shanti Devi Mittal Auditorium</span><br>
+          Lovely Professional University, Jalandhar
+        </p>
+        <ul class="mt-4 space-y-2 text-neutral-300 list-disc list-inside">
+          <li>Easy public transport access</li>
+          <li>High-speed Wi-Fi and charging zones</li>
+          <li>Food court and lounge areas</li>
+        </ul>
+        <p class="mt-4 text-sm text-neutral-400">Detailed travel info and logistics will be shared soon.</p>
+      </div>
 
-            <article class="glass-card p-6 reveal">
-                <h3 class="mt-2 font-semibold">Session Track: Building with AWS</h3>
-                <p class="mt-2 text-neutral-300">
-                Dive into AI, Web3, Cybersecurity, and Cloud with live demos, real-world case studies, and speaker-led hands-on sessions.
-                </p>
-            </article>
-
-            <article class="glass-card p-6 reveal">
-                <h3 class="mt-2 font-semibold">Workshop: From Code to Cloud</h3>
-                <p class="mt-2 text-neutral-300">
-                Hands-on with AWS - build, deploy, and scale serverless applications using Lambda, API Gateway, and more.
-                </p>
-            </article>
-
-            <article class="glass-card p-6 reveal">
-                <h3 class="mt-2 font-semibold">Panel: The Future of Tech in India</h3>
-                <p class="mt-2 text-neutral-300">
-                A discussion on AI, Cloud, Web3, and Cybersecurity - industry leaders share insights on innovation, careers, and challenges in India.
-                </p>
-            </article>
-
-            <article class="glass-card p-6 reveal">
-                <h3 class="mt-2 font-semibold">Student Activities & Challenges</h3>
-                <p class="mt-2 text-neutral-300">
-                Engage in quizzes, challenges, and AWS-powered activities. Top performers win AWS Credits and exclusive rewards.
-                </p>
-            </article>
-
-            <article class="glass-card p-6 reveal">
-                <h3 class="mt-2 font-semibold">Networking & Closing Ceremony</h3>
-                <p class="mt-2 text-neutral-300">
-                Meet speakers, mentors, and fellow builders. Celebrate achievements and wrap up the day with community highlights.
-                </p>
-            </article>
-            </div>
-        </div>
-    </section>
-
-    <section id="speakers" class="section px-4">
-        <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold">Speakers</h2>
-            <div class="glass-card p-8 mt-6 reveal">
-                <p class="text-neutral-300">Speakers will be announced soon.</p>
-                <a href="/speakers" class="btn-primary inline-flex items-center justify-center rounded-md px-5 py-3 mt-5">
-                    Submit a Talk
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="venue" class="section px-4">
-        <div class="mx-auto max-w-6xl grid md:grid-cols-2 gap-6 items-center">
-            <div class="reveal">
-                <h2 class="text-2xl sm:text-3xl font-bold">Venue</h2>
-                <p class="mt-3 text-neutral-300">Shanti Devi Mittal Auditorium <br> Lovely Professional University, Jalandhar 
-                <br>
-                • Venue details coming soon with travel guidance, parking and accessibility.</p>
-                <ul class="mt-4 space-y-2 text-neutral-300 list-disc list-inside">
-                    <li>Easy public transport access</li>
-                    <li>High-speed Wi‑Fi and charging zones</li>
-                    <li>Food court and lounge areas</li>
-                </ul>
-            </div>
-                <div class="glass-card reveal overflow-hidden">
-                        <div class="relative w-full" style="aspect-ratio: 16/9;">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3637.3844029168204!2d75.70067866883618!3d31.251728167435164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a5f66440fb2c1%3A0xca553bb20da605de!2sShanti%20Devi%20Mittal%20Auditorium!5e1!3m2!1sen!2sin!4v1760164208005!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                </div>
-        </div>
-    </section>
+      <div class="relative reveal rounded-2xl overflow-hidden shadow-[0_0_25px_rgba(251,191,36,0.4)] border border-amber-400/30">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3637.3844029168204!2d75.70067866883618!3d31.251728167435164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a5f66440fb2c1%3A0xca553bb20da605de!2sShanti%20Devi%20Mittal%20Auditorium!5e1!3m2!1sen!2sin!4v1760164208005!5m2!1sen!2sin"
+          class="w-full h-[350px] md:h-[400px]" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
 </div>
 {% endblock %}

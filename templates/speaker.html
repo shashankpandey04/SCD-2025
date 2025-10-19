@@ -1,102 +1,151 @@
 {% extends "base.html" %}
-{% block title %}Join the Waitlist{% endblock %}
+{% block title %}Speakers | AWS SCD Jalandhar 2025{% endblock %}
 {% block content %}
 
-<div id="bg-animated" style="position:relative; overflow:hidden;">
-    <canvas id="animated-bg-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
-    <section id="speakers" class="pt-32">
-        <div class="mx-auto max-w-3xl text-center">
-            <h1 class="text-4xl sm:text-5xl font-bold">Our Speakers</h1>
-            <p class="mt-4 text-neutral-300">We are currently in the process of finalizing our speaker lineup. Stay tuned for updates!</p>
-            <p class="mt-2 text-neutral-300">Interested in speaking at our event? Submit your proposal below!</p>
-        </div>
+<div id="bg-animated" class="relative overflow-hidden">
+    <canvas id="animated-bg-canvas" class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none"></canvas>
 
+    <!-- Speaker Section -->
+    <section id="speakers" class="pt-32 relative z-10">
+        <div class="mx-auto max-w-3xl text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gradient">Our Speakers</h1>
+            <p class="mt-4 text-neutral-300 text-base sm:text-lg">
+                We're finalizing an exciting lineup of speakers from across the AWS, cloud, and AI ecosystem.
+            </p>
+            <p class="mt-2 text-neutral-400">
+                Interested in speaking at our event? Submit your proposal below.
+            </p>
+        </div>
     </section>
 
-    <section id="cfs" class="pt-12 pb-12">
+    <!-- Call for Speakers -->
+    <section id="cfs" class="pt-12 pb-20 relative z-10">
         <div class="mx-auto max-w-4xl">
+
             {% if current_user.is_authenticated %}
                 {% if already_applied.status == 'pending' %}
-                    <div class="glass-card p-6 sm:p-8 reveal text-center">
-                        <h2 class="text-2xl sm:text-3xl font-bold">You have already submitted a proposal!</h2>
-                        <p class="mt-2 text-neutral-300">Thank you for your interest. We will review your submission and get back to you soon.
-                            <br />
-                            If you have any questions, feel free to <a href="mailto:scd@awslpu.in" class="text-violet-400 hover:text-violet-300">contact us</a>.
-                        <br/>
-                        You will be contacted via email at
-                        <blockquote class="italic text-violet-400">
-                            {{ already_applied.email }}
-                        </blockquote>regarding the status of your proposal.
+                    <div class="glass-card p-8 reveal text-center">
+                        <h2 class="text-3xl font-semibold">🎤 Proposal Submitted</h2>
+                        <p class="mt-3 text-neutral-300">
+                            Thank you for your interest! We’re reviewing your submission and will get back to you soon.
+                            <br><br>
+                            You’ll be contacted at:
+                            <span class="block mt-2 font-mono text-violet-400">{{ already_applied.email }}</span>
+                        </p>
+                        <p class="mt-3 text-sm text-neutral-500">
+                            For questions, reach out to
+                            <a href="mailto:scd@awslpu.in" class="text-violet-400 hover:text-violet-300">scd@awslpu.in</a>
                         </p>
                     </div>
+
                 {% elif already_applied.status == 'accepted' %}
-                    <div class="glass-card p-6 sm:p-8 reveal text-center">
-                        <h2 class="text-2xl sm:text-3xl font-bold">Congratulations!</h2>
-                        <p class="mt-2 text-neutral-300">Your proposal has been accepted. We look forward to your session at the event! You will receive further instructions via email.</p>
+                    <div class="glass-card p-8 text-center reveal border border-violet-400/30 shadow-[0_0_30px_-10px_rgba(167,139,250,0.4)]">
+                        <h2 class="text-3xl font-semibold text-violet-300">✅ Proposal Accepted</h2>
+                        <p class="mt-3 text-neutral-300">
+                            Congratulations! Your session has been accepted for AWS SCD Jalandhar 2025.
+                            We’ll send further details to your registered email soon.
+                        </p>
                     </div>
+
                 {% elif already_applied.status == 'rejected' %}
-                    <div class="glass-card p-6 sm:p-8 reveal text-center">
-                        <h2 class="text-2xl sm:text-3xl font-bold">Thank you for your submission</h2>
-                        <p class="mt-2 text-neutral-300">We appreciate your interest. Unfortunately, your proposal was not selected this time. Please consider applying again in the future.</p>
+                    <div class="glass-card p-8 text-center reveal border border-red-400/30">
+                        <h2 class="text-3xl font-semibold text-red-300">❌ Proposal Not Selected</h2>
+                        <p class="mt-3 text-neutral-300">
+                            Thank you for submitting your proposal. Unfortunately, it wasn’t selected this time — 
+                            but we encourage you to apply for future events!
+                        </p>
                     </div>
+
                 {% else %}
-                    <div class="glass-card p-6 sm:p-8 reveal">
-                        <h2 class="text-2xl sm:text-3xl font-bold text-center">Call for Speakers</h2>
-                        <p class="mt-2 text-neutral-300 text-center">Share your expertise on AWS, serverless, GenAI, cloud-native, security, or DevOps.</p>
+                    <div class="glass-card p-8 reveal">
+                        <h2 class="text-3xl font-semibold text-center">📣 Call for Speakers</h2>
+                        <p class="mt-3 text-neutral-300 text-center">
+                            Share your expertise on AWS, GenAI, Cloud-native systems, or DevOps — and inspire hundreds of developers.
+                        </p>
+
                         <div id="message" class="mt-4 hidden p-4 rounded-md text-center"></div>
-                        <form id="speakerForm" class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="sm:col-span-1">
+
+                        <form id="speakerForm" class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
                                 <label class="text-sm text-neutral-300">Full Name</label>
-                                <input required name="name" type="text" id="name" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Your name" value="{{ current_user.first_name ~ ' ' ~ current_user.last_name }}"/>
+                                <input required name="name" type="text"
+                                    class="mt-1 w-full rounded-lg bg-neutral-800/60 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400"
+                                    placeholder="Your name"
+                                    value="{{ current_user.first_name ~ ' ' ~ current_user.last_name }}">
                             </div>
-                            <div class="sm:col-span-1">
+
+                            <div>
                                 <label class="text-sm text-neutral-300">Email</label>
-                                <input required name="email" type="email" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="you@example.com" value="{{ current_user.email }}"/>
+                                <input required name="email" type="email"
+                                    class="mt-1 w-full rounded-lg bg-neutral-800/60 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400"
+                                    placeholder="you@example.com"
+                                    value="{{ current_user.email }}">
                             </div>
-                            <div class="sm:col-span-1">
+
+                            <div>
                                 <label class="text-sm text-neutral-300">Talk Title</label>
-                                <input required name="title" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="Title of your session"/>
+                                <input required name="title" type="text"
+                                    class="mt-1 w-full rounded-lg bg-neutral-800/60 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400"
+                                    placeholder="Title of your session">
                             </div>
-                            <div class="sm:col-span-1">
+
+                            <div>
                                 <label class="text-sm text-neutral-300">Track</label>
-                                <select required name="track" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400">
+                                <select required name="track"
+                                    class="mt-1 w-full rounded-lg bg-neutral-800/60 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400">
                                     <option value="" disabled selected>Select a track</option>
-                                    <option value="AI/ML">AI & Machine Learning</option>
-                                    <option value="Cloud">Cloud Computing & Serverless</option>
-                                    <option value="Security">Cybersecurity & Compliance</option>
-                                    <option value="Web3">Web3 & Blockchain</option>
-                                    <option value="DevOps">DevOps & Infrastructure</option>
-                                    <option value="Data">Data Analytics & Modern Databases</option>
+                                    <option>AI & Machine Learning</option>
+                                    <option>Cloud Computing & Serverless</option>
+                                    <option>Cybersecurity & Compliance</option>
+                                    <option>Web3 & Blockchain</option>
+                                    <option>DevOps & Infrastructure</option>
+                                    <option>Data Analytics & Modern Databases</option>
                                 </select>
                             </div>
+
                             <div class="sm:col-span-2">
                                 <label class="text-sm text-neutral-300">Abstract</label>
-                                <textarea required name="abstract" rows="4" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="What will attendees learn?"></textarea>
+                                <textarea required name="abstract" rows="4"
+                                    class="mt-1 w-full rounded-lg bg-neutral-800/60 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400"
+                                    placeholder="Describe what attendees will learn..."></textarea>
                             </div>
-                            <div class="sm:col-span-1">
+
+                            <div>
                                 <label class="text-sm text-neutral-300">Experience Level</label>
-                                <select required name="level" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400">
+                                <select required name="level"
+                                    class="mt-1 w-full rounded-lg bg-neutral-800/60 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400">
                                     <option value="" disabled selected>Select level</option>
                                     <option>Beginner</option>
                                     <option>Intermediate</option>
                                     <option>Advanced</option>
                                 </select>
                             </div>
-                            <div class="sm:col-span-1">
+
+                            <div>
                                 <label class="text-sm text-neutral-300">Profile/Links (optional)</label>
-                                <input name="link" type="text" class="mt-1 w-full rounded-md bg-neutral-800/50 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400" placeholder="LinkedIn, GitHub, website"/>
+                                <input name="link" type="text"
+                                    class="mt-1 w-full rounded-lg bg-neutral-800/60 border border-neutral-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400"
+                                    placeholder="LinkedIn, GitHub, website">
                             </div>
+
                             <div class="sm:col-span-2 flex justify-center">
-                                <button type="submit" class="btn-primary rounded-md px-6 py-3">Submit Proposal</button>
+                                <button type="submit" class="btn-primary rounded-md px-8 py-3 mt-4">
+                                    Submit Proposal
+                                </button>
                             </div>
                         </form>
                     </div>
                 {% endif %}
             {% else %}
-                <div class="glass-card p-6 sm:p-8 reveal text-center">
-                    <h2 class="text-2xl sm:text-3xl font-bold">Please Log In to Submit a Proposal</h2>
-                    <p class="mt-2 text-neutral-300">You need to be logged in to access the Call for Speakers form.</p>
-                    <a href="{{ url_for('auth.login') }}" class="btn-primary mt-4 inline-block rounded-md px-6 py-3">Log In</a>
+                <div class="glass-card p-8 text-center reveal">
+                    <h2 class="text-3xl font-semibold">🔒 Please Log In</h2>
+                    <p class="mt-3 text-neutral-300">
+                        You need to be logged in to submit a Call for Speakers proposal.
+                    </p>
+                    <a href="{{ url_for('auth.login') }}"
+                       class="btn-primary mt-5 inline-block rounded-md px-6 py-3">
+                        Log In to Continue
+                    </a>
                 </div>
             {% endif %}
         </div>
@@ -104,33 +153,38 @@
 </div>
 
 <script>
-document.getElementById('speakerForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const messageDiv = document.getElementById('message');
-    
-    try {
-        const response = await fetch('/speakers', {
-            method: 'POST',
-            body: formData
-        });
-        const data = await response.json();
-        
-        if (response.ok) {
-            messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-green-500/20 text-green-300';
-            messageDiv.textContent = data.message;
-            e.target.innerHTML = '<h2 class="text-2xl sm:text-3xl font-bold text-center">Thank you for your submission!</h2><p class="mt-2 text-neutral-300 text-center">We will review your proposal and get back to you soon.</p>';
-            e.target.reset();
-        } else {
+const form = document.getElementById('speakerForm');
+if (form) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const messageDiv = document.getElementById('message');
+
+        try {
+            const response = await fetch('/speakers', { method: 'POST', body: formData });
+            const data = await response.json();
+
+            if (response.ok) {
+                messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-green-500/20 text-green-300';
+                messageDiv.textContent = data.message;
+                form.innerHTML = `
+                    <h2 class="text-2xl sm:text-3xl font-bold text-center">Thank you for your submission!</h2>
+                    <p class="mt-2 text-neutral-300 text-center">
+                        We’ll review your proposal and get back to you soon.
+                    </p>`;
+            } else {
+                messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-red-500/20 text-red-300';
+                messageDiv.textContent = data.error || 'An error occurred';
+            }
+
+            messageDiv.classList.remove('hidden');
+        } catch {
             messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-red-500/20 text-red-300';
-            messageDiv.textContent = data.error || 'An error occurred';
+            messageDiv.textContent = 'Failed to submit. Please try again.';
+            messageDiv.classList.remove('hidden');
         }
-        messageDiv.classList.remove('hidden');
-    } catch (error) {
-        messageDiv.className = 'mt-4 p-4 rounded-md text-center bg-red-500/20 text-red-300';
-        messageDiv.textContent = 'Failed to submit. Please try again.';
-        messageDiv.classList.remove('hidden');
-    }
-});
+    });
+}
 </script>
+
 {% endblock %}
