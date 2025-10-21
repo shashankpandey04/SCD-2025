@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Get Your Tickets{% endblock %}
+{% block content %}
+<div id="bg-animated" style="position:relative; overflow:hidden;">
+    <canvas id="animated-bg-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+    
+    <section id="tickets" class="pt-32">
+        <div class="mx-auto max-w-5xl">
+            <div class="glass-card p-6 sm:p-8 reveal">
+                <h2 class="text-3xl font-bold text-center">Get Your Tickets</h2>
+                <p class="mt-2 text-neutral-300 text-center">Secure your spot for the event! Choose your ticket tier and join 1000+ attendees.</p>
+                
+                <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    
+                    <div class="rounded-2xl border border-violet-500/50 bg-neutral-900/50 p-6 hover:shadow-lg hover:shadow-violet-500/20 transition">
+                        <h3 class="text-xl font-semibold text-white text-center">Early Bird</h3>
+                        <p class="text-center text-4xl font-bold text-violet-400 mt-2">₹399</p>
+                        <p class="text-center text-sm text-neutral-400">Limited to first 200 attendees</p>
+                        <ul class="mt-4 space-y-2 text-sm text-neutral-300">
+                            <li>✔ Free .xyz domain (worth ₹1500)</li>
+                            <li>✔ Full Event Kit (T-Shirt, ID, Carry Bag, Stickers)</li>
+                            <li>✔ Priority Entry</li>
+                            <li>✔ Certificate of Participation</li>
+                        </ul>
+                        <div class="mt-6 text-center">
+                            <button data-tier="Early Bird" class="select-tier btn-primary px-6 py-3 rounded-md w-full">
+                                Coming Soon!
+                            </button>
+                            <p class="text-sm text-neutral-400">
+                                Starting from 1st November.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl border border-neutral-700 bg-neutral-900/50 p-6 hover:shadow-lg hover:shadow-violet-400/10 transition">
+                        <h3 class="text-xl font-semibold text-white text-center">Regular</h3>
+                        <p class="text-center text-4xl font-bold text-white mt-2">₹499</p>
+                        <p class="text-center text-sm text-neutral-400">Standard access for all attendees</p>
+                        <ul class="mt-4 space-y-2 text-sm text-neutral-300">
+                            <li>✔ Full Event Kit (T-Shirt, ID, Carry Bag, Stickers)</li>
+                            <li>✔ Certificate of Participation</li>
+                            <li>✔ Access to all sessions</li>
+                        </ul>
+                        <div class="mt-6 text-center">
+                            <button data-tier="Regular" class="select-tier btn-primary px-6 py-3 rounded-md w-full" disabled>
+                                Coming Soon!
+                            </button>
+                            <p class="text-sm text-neutral-400">
+                                Starting from 5th November.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl border border-neutral-700 bg-neutral-900/50 p-6 hover:shadow-lg hover:shadow-red-500/10 transition">
+                        <h3 class="text-xl font-semibold text-white text-center">On-Spot</h3>
+                        <p class="text-center text-4xl font-bold text-red-400 mt-2">₹599</p>
+                        <p class="text-center text-sm text-neutral-400">For late or last-minute registrations</p>
+                        <ul class="mt-4 space-y-2 text-sm text-neutral-300">
+                            <li>✔ Full Event Kit (subject to stock)</li>
+                            <li>✔ Certificate of Participation</li>
+                            <li>✖ No domain offer</li>
+                        </ul>
+                        <div class="mt-6 text-center">
+                            <button data-tier="On-Spot" class="select-tier btn-primary px-6 py-3 rounded-md w-full" disabled>
+                                Coming Soon!
+                            </button>
+                            <p class="text-sm text-neutral-400">
+                                Available from 10th November!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>
+
+<script>
+const tierButtons = document.querySelectorAll('.select-tier');
+const selectedTierInput = document.getElementById('selected-tier');
+const submitBtn = document.getElementById('submit-btn');
+const alertDiv = document.getElementById('alert-message');
+
+tierButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        selectedTierInput.value = btn.dataset.tier;
+        tierButtons.forEach(b => b.classList.remove('ring', 'ring-violet-500'));
+        btn.classList.add('ring', 'ring-violet-500');
+        alertDiv.classList.add('hidden');
+        window.scrollTo({ top: document.getElementById('ticket-form').offsetTop - 100, behavior: 'smooth' });
+    });
+});
+
+</script>
+
+{% endblock %}

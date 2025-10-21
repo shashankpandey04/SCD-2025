@@ -6,7 +6,7 @@ import os
 from flask_login import LoginManager
 
 from Routes.Sponsor import sponsor_bp
-from Routes.Waitlist import waitlist_bp
+from Routes.Tickets import ticket_bp
 from Routes.Speakers import speaker_bp
 from Routes.Auth import auth_bp
 from Routes.Dashbaord import dashboard_bp
@@ -40,7 +40,7 @@ def load_user(user_id):
 
 routes = [
     sponsor_bp,
-    waitlist_bp,
+    ticket_bp,
     speaker_bp,
     auth_bp,
     dashboard_bp
